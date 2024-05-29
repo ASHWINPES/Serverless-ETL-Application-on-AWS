@@ -17,8 +17,8 @@ def lambda_handler(event, context):
     
     # extract pieces of the dictionary
     processed_dict = {}
-    processed_dict['time'] = r_dict['features']['properties']['timestamp']
-    processed_dict['taxi_count'] = r_dict['features']['properties']['taxi_count']
+    processed_dict['time'] = r_dict['features'][0]['properties']['timestamp']
+    processed_dict['taxi_count'] = r_dict['features'][0]['properties']['taxi_count']
     processed_dict['row_ts'] = str(datetime.datetime.now())
     
     # turn it into a string and add a newline
