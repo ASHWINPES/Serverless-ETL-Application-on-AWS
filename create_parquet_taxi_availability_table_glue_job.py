@@ -22,10 +22,10 @@ queryStart = client.start_query_execution(
     SELECT
         taxi_count AS total_taxis_available
         ,taxi_count / 100 AS total_taxis_in_hundreds
-        ,time
         ,row_ts
+        ,time
     FROM "{MY_DATABASE}"."{SOURCE_TABLE_NAME}"
-    ORDER BY 3
+    ORDER BY 4
     ;
     """,
     QueryExecutionContext = {
