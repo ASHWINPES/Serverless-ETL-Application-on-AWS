@@ -6,12 +6,12 @@ import awswrangler as wr
 NULL_DQ_CHECK = f"""
 SELECT 
     SUM(CASE WHEN total_taxis_in_hundreds IS NULL THEN 1 ELSE 0 END) AS res_col
-FROM "de_proj_database"."open_meteo_weather_data_parquet_tbl"
+FROM "taxi_availability_database"."taxi_availability_data_parquet_tbl"
 ;
 """
 
 # run the quality check
-df = wr.athena.read_sql_query(sql=NULL_DQ_CHECK, database="de_proj_database")
+df = wr.athena.read_sql_query(sql=NULL_DQ_CHECK, database="taxi_availability_database")
 
 # exit if we get a result > 0
 # else, the check was successful
