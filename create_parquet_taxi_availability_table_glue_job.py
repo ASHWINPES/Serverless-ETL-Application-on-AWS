@@ -25,7 +25,7 @@ queryStart = client.start_query_execution(
         ,time
         ,row_ts
     FROM "{MY_DATABASE}"."{SOURCE_TABLE_NAME}"
-
+    ORDER BY 3
     ;
     """,
     QueryExecutionContext = {
