@@ -3,7 +3,7 @@ import json
 import boto3
 
 # replace these with the names from your environment
-BUCKET_TO_DEL = 'taxi-availability-data-parquet-bucket-1'
+BUCKET_TO_DEL = 'taxi-availability-data-parquet-bucket-2'
 DATABASE_TO_DEL = 'taxi_availability_database'
 TABLE_TO_DEL = 'taxi_availability_data_parquet_tbl'
 QUERY_OUTPUT_BUCKET = 's3://query-results-location-taxi-availability-1/'
