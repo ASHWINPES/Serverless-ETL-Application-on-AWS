@@ -22,11 +22,15 @@ queryStart = client.start_query_execution(
     (external_location='{NEW_PROD_PARQUET_TABLE_S3_BUCKET}/{DATETIME_NOW_INT_STR}/',
     format='PARQUET',
     write_compression='SNAPPY',
-    partitioned_by = ARRAY['time'])
+    partitioned_by = ARRAY['time'],
+    bucketed_by=ARRAY['hr'],
+    bucket_count=10)
     AS
 
     SELECT
-        *
+        total_taxis_in_hundreds
+        ,date_format(from_iso8601_timestamp(time), '%H') AS hr
+        ,time
     FROM "{MY_DATABASE}"."{SOURCE_PARQUET_TABLE_NAME}"
 
     ;
