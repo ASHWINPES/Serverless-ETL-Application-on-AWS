@@ -16,16 +16,18 @@ queryStart = client.start_query_execution(
     (external_location='{NEW_TABLE_S3_BUCKET}',
     format='PARQUET',
     write_compression='SNAPPY',
-    partitioned_by = ARRAY['time'])
+    partitioned_by = ARRAY['time'],
+    bucketed_by=ARRAY['hr'],
+    bucket_count=10)
     AS
 
     SELECT
         taxi_count AS total_taxis_available
         ,taxi_count / 100 AS total_taxis_in_hundreds
         ,row_ts
+        ,date_format(from_iso8601_timestamp(time), '%H') AS hr
         ,time
     FROM "{MY_DATABASE}"."{SOURCE_TABLE_NAME}"
-    ORDER BY 4
     ;
     """,
     QueryExecutionContext = {
