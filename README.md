@@ -74,7 +74,7 @@ General workflow will contain 4 Glue jobs.
 
 
 PART 3: Data Visualization
-Grafana is a open-source visualization tool which can easily integrated with AWS. By configuration and connecting Grafana and AWS Athena. We can visualize the data in the tables inside S3 buckets.
+Grafana is a open-source visualization tool which can be easily integrated with AWS. By configuration and connecting Grafana and AWS Athena, we can visualize the data in the tables inside S3 buckets.
 
 The use-case I achieved in this project is Checking the availability of taxis in Singapore during business hours 8:00 A.M. to 8:00 P.M. (Singapore local time)
 
