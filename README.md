@@ -68,10 +68,15 @@ Important: AWS Glue job runs in form of DPU (Data Processing Unit) which is a VM
 Glue workflow is orchestrating Glue jobs executed in a sequence to transform raw data into prod data.
 
 General workflow will contain 4 Glue jobs.
-    1. Invoke the Glue crawler to crawl the data ingested by AWS Firehose and create the table for the next step of workflow
-    2. Trigger the Delete Glue job (Glue Job 1) to remove any old parquet table in S3 bucket
-    3. Trigger the Create Glue job (Glue Job 2) to create fresh parquet format partitioned table and place it in S3
+
+    1. Invoke the Glue crawler to crawl the data ingested by AWS Firehose and create the table for the next step of workflow.
+    
+    2. Trigger the Delete Glue job (Glue Job 1) to remove any old parquet table in S3 bucket.
+    
+    3. Trigger the Create Glue job (Glue Job 2) to create fresh parquet format partitioned table and place it in S3.
+    
     4. Trigger the Data Quality Check Glue job (Glue Job 3) to check the quality of data in the parquet table created by the Create Glue job.
+    
     5. Trigger the Prod Glue job (Glue Job 4) to store a final desirable version of the parquet table used for visualization.
 
 ![Alt text](AWS_GlueWorkflow.png)
