@@ -40,6 +40,7 @@ EventBridge is the AWS trigger service used on lambda functions to execute them 
 
 PART 2: Data Transformation (major part in an ETL pipeline)
 1. Batching the ingested data using AWS Firehose (previously known as Kinesis Firehose)
+   
 The ingested data can be batched which will later be highly helpful while analysing a particular portion of the data we ingested.
 
 AWS Firehose is the serverless batching data service that batches the data captured from the source and stores it in S3. Firehose is highly scalable in a way it can actually handle as high volumes as we want.
@@ -47,11 +48,13 @@ AWS Firehose is the serverless batching data service that batches the data captu
 A Firehose instance is created and configured based on how we want our data to be batched. Now, attaching it to a lambda function which extracts data from a source will ingest data into Firehose which in turn places data in batches into S3.
 
 2. Build table from the batched data using Glue Crawler
+   
 Crawl all batched data by AWS Firehose to automatically build a table where the table will contain data from all the batches. Crawler is part of a larger service called AWS Glue.
 
 ![Alt text](AWS_GlueCrawler.png)
 
 3. Create jobs in AWS Glue used in AWS Glue workflow to prepare the production data used for visualization
+   
 Parquet is a column store data format. Unlike row store data format which groups data in a row as a single object, parquet format groups data in a column as a single object. Storing the column grouped data is good as compression algorithms operate on homogenous data and when querying this data will be cheaper. Parquet files can be partitioned similar to data created by AWS Firehose, partitioned tables allows the query to pull the data happened to be partition can result in reducing query cost and increasing query speed.
 
 Glue jobs (lambda functions) (worker nodes) performs a single unit of work. Each job does a portion for work required to transform the raw data into desired dataset. Each job runs a transformation in SQL which is passed to AWS Athena comes back with query results making it available to be pushed into S3 in desired format required for the next job.
@@ -61,6 +64,7 @@ Important: AWS Glue job runs in form of DPU (Data Processing Unit) which is a VM
 ![Alt text](AWS_GlueJobs.png)
 
 4. Build the Glue workflow to put together all the jobs created in previous step to get the production data ready
+
 Glue workflow is orchestrating Glue jobs executed in a sequence to transform raw data into prod data.
 
 General workflow will contain 4 Glue jobs.
